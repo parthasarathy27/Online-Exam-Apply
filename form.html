@@ -1,0 +1,180 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Government Exam Registration</title>
+    <script src="https://cdn.tailwindcss.com"></script>
+</head>
+<body class="bg-gray-100 flex items-center justify-center min-h-screen">
+    <div class="bg-white p-8 rounded-lg shadow-lg max-w-3xl w-full">
+        <h2 class="text-2xl font-bold text-center text-blue-600 mb-6">Government Exam Registration</h2>
+        
+        <form id="examForm" class="mt-6" onsubmit="handleSubmit(event)">
+            <!-- Step 1: Personal Details -->
+            <div id="step1" class="step">
+                <h3 class="text-lg font-semibold mb-4">Personal Details</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" name="fullName" class="border p-2 rounded" placeholder="Full Name" required>
+                    <input type="email" name="email" class="border p-2 rounded" placeholder="Email Address" required>
+                    <input type="tel" name="phone" class="border p-2 rounded" placeholder="Phone Number" required>
+                    <input type="date" name="dob" class="border p-2 rounded" required>
+                    <input type="text" name="fatherName" class="border p-2 rounded" placeholder="Father's Name" required>
+                    <input type="text" name="motherName" class="border p-2 rounded" placeholder="Mother's Name" required>
+                    <input type="text" name="address" class="border p-2 rounded" placeholder="Address" required>
+                    <input type="text" name="aadhar" class="border p-2 rounded" placeholder="Aadhar Number" required>
+                    <input type="text" name="nationality" class="border p-2 rounded" placeholder="Nationality" required>
+                    <select name="category" class="border p-2 rounded" required>
+                        <option value="">Select Category</option>
+                        <option value="GEN">GEN</option>
+                        <option value="OBC">OBC</option>
+                        <option value="SC">SC</option>
+                        <option value="ST">ST</option>
+                    </select>
+                </div>
+                <button type="button" class="mt-4 px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" onclick="nextStep(2)">Next</button>
+            </div>
+
+            <!-- Step 2: Educational Details -->
+            <div id="step2" class="hidden step">
+                <h3 class="text-lg font-semibold mb-4">Educational & Exam Details</h3>
+                <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                    <input type="text" name="qualification" class="border p-2 rounded" placeholder="Highest Qualification" required>
+                    <input type="text" name="college" class="border p-2 rounded" placeholder="College/University Name" required>
+                    <input type="text" name="rollNumber" class="border p-2 rounded" placeholder="Roll Number" required>
+                    <select name="examType" class="border p-2 rounded" required>
+                        <option value="">Select Exam Type</option>
+                        <option value="RRB">RRB</option>
+                        <option value="UPSC">UPSC</option>
+                        <option value="TNPSC">TNPSC</option>
+                        <option value="SSC">SSC</option>
+                    </select>
+                    <input type="text" name="examCenter" class="border p-2 rounded" placeholder="Preferred Exam Center" required>
+                    <input type="file" name="document" class="border p-2 rounded" accept=".pdf,.doc,.docx" required>
+                    <select name="language" class="border p-2 rounded" required>
+                        <option value="">Exam Language</option>
+                        <option value="English">English</option>
+                        <option value="Hindi">Hindi</option>
+                        <option value="Tamil">Tamil</option>
+                        <option value="Other">Other</option>
+                    </select>
+                    <input type="number" name="attempts" class="border p-2 rounded" placeholder="Previous Exam Attempts" required>
+                    <input type="text" name="experience" class="border p-2 rounded" placeholder="Work Experience (if any)">
+                    <select name="disability" class="border p-2 rounded" required>
+                        <option value="">Any Disability?</option>
+                        <option value="Yes">Yes</option>
+                        <option value="No">No</option>
+                    </select>
+                </div>
+                <div class="flex justify-between mt-4">
+                    <button type="button" class="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500" onclick="prevStep(1)">Previous</button>
+                    <button type="button" class="px-4 py-2 bg-blue-500 text-white rounded hover:bg-blue-600" onclick="nextStep(3)">Next</button>
+                </div>
+            </div>
+
+            <!-- Step 3: Confirmation -->
+            <div id="step3" class="hidden step">
+                <h3 class="text-lg font-semibold mb-4">Confirmation</h3>
+                <p class="mb-4 text-gray-600">Please review your details before submitting.</p>
+            
+
+                <div id="confirmationDetails" class="bg-gray-100 p-4 rounded-lg shadow-sm mb-4"></div>
+            
+                <div class="flex items-center mb-6">
+                    <input type="checkbox" id="terms" class="mr-2" required>
+                    <label for="terms">I agree to the <a href="#" class="text-blue-600 hover:underline">terms and conditions</a></label>
+                </div>
+            
+                <div class="flex justify-between">
+                    <button type="button" class="px-4 py-2 bg-gray-400 text-white rounded hover:bg-gray-500" onclick="prevStep(2)">Previous</button>
+                    <button type="submit" class="px-4 py-2 bg-green-500 text-white rounded hover:bg-green-600">Submit Application</button>
+                </div>
+            </div>
+            
+        </form>
+
+        <!-- Success Section -->
+        <div id="successSection" class="hidden text-center py-8">
+            <div class="mb-6 text-green-500">
+                <svg xmlns="http://www.w3.org/2000/svg" class="h-16 w-16 mx-auto" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z" />
+                </svg>
+            </div>
+            <h3 class="text-2xl font-bold mb-4">Application Submitted Successfully!</h3>
+            <p class="mb-6 text-gray-600">Choose your exam portal to proceed further:</p>
+            <div class="grid grid-cols-1 md:grid-cols-2 gap-4">
+                <a href="https://www.rrbchennai.gov.in/" class="p-3 bg-blue-100 text-blue-600 rounded hover:bg-blue-200" target="_blank">RRB Official Portal</a>
+                <a href="https://www.tnpsc.gov.in/" class="p-3 bg-blue-100 text-blue-600 rounded hover:bg-blue-200" target="_blank">TNPSC Portal</a>
+                <a href="https://ssc.gov.in/" class="p-3 bg-blue-100 text-blue-600 rounded hover:bg-blue-200" target="_blank">SSC Portal</a>
+                <a href="https://upsc.gov.in/" class="p-3 bg-blue-100 text-blue-600 rounded hover:bg-blue-200" target="_blank">UPSC Portal</a>
+            </div>
+            <button onclick="resetForm()" class="mt-6 px-4 py-2 bg-gray-100 text-gray-600 rounded hover:bg-gray-200">Submit Another Application</button>
+        </div>
+    </div>
+
+    <script>
+        function nextStep(step) {
+            document.querySelectorAll(".step").forEach(el => el.classList.add("hidden"));
+            document.getElementById("step" + step).classList.remove("hidden");
+        }
+
+        function prevStep(step) {
+            document.querySelectorAll(".step").forEach(el => el.classList.add("hidden"));
+            document.getElementById("step" + step).classList.remove("hidden");
+        }
+
+        function handleSubmit(event) {
+            event.preventDefault();
+            const formData = new FormData(event.target);
+            const data = Object.fromEntries(formData.entries());
+            
+            // You can handle the data here (e.g., send to server)
+            console.log("Form Data:", data);
+            
+            // Show success section
+            document.getElementById('examForm').classList.add('hidden');
+            document.getElementById('successSection').classList.remove('hidden');
+        }
+
+        function resetForm() {
+            document.getElementById('examForm').reset();
+            document.getElementById('examForm').classList.remove('hidden');
+            document.getElementById('successSection').classList.add('hidden');
+            nextStep(1);
+        }
+
+        function nextStep(step) {
+        if (step === 3) {
+            // Populate confirmation page
+            const formData = new FormData(document.getElementById('examForm'));
+            const data = Object.fromEntries(formData.entries());
+
+            document.getElementById('confirmationDetails').innerHTML = `
+                <h3 class="text-lg font-semibold mb-4">Review Your Details</h3>
+                <p><strong>Full Name:</strong> ${data.fullName}</p>
+                <p><strong>Email:</strong> ${data.email}</p>
+                <p><strong>Phone:</strong> ${data.phone}</p>
+                <p><strong>Date of Birth:</strong> ${data.dob}</p>
+                <p><strong>Father's Name:</strong> ${data.fatherName}</p>
+                <p><strong>Mother's Name:</strong> ${data.motherName}</p>
+                <p><strong>Address:</strong> ${data.address}</p>
+                <p><strong>Aadhar Number:</strong> ${data.aadhar}</p>
+                <p><strong>Nationality:</strong> ${data.nationality}</p>
+                <p><strong>Category:</strong> ${data.category}</p>
+                <p><strong>Highest Qualification:</strong> ${data.qualification}</p>
+                <p><strong>College/University:</strong> ${data.college}</p>
+                <p><strong>Exam Type:</strong> ${data.examType}</p>
+                <p><strong>Preferred Exam Center:</strong> ${data.examCenter}</p>
+                <p><strong>Exam Language:</strong> ${data.language}</p>
+                <p><strong>Previous Attempts:</strong> ${data.attempts}</p>
+                <p><strong>Work Experience:</strong> ${data.experience || "N/A"}</p>
+                <p><strong>Any Disability:</strong> ${data.disability}</p>
+            `;
+        }
+
+        document.querySelectorAll(".step").forEach(el => el.classList.add("hidden"));
+        document.getElementById("step" + step).classList.remove("hidden");
+    }
+    </script>
+</body>
+</html>
